@@ -6,7 +6,7 @@ import Spinner from '../components/Spinner'
 
 function ShowBook() {
 
-    const [book, setBook] = useState([]);
+    const [book, setBook] = useState({});
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
 
@@ -14,9 +14,8 @@ function ShowBook() {
         setLoading(true);
         axios
             .get(`http://localhost:8000/books/${id}`)
-            .then((resp) => {
-                console.log(resp.data)
-                setBook(resp.data);
+            .then((response) => {
+                setBook(response.data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -37,9 +36,9 @@ function ShowBook() {
                     <Spinner />
                 ) : (
                     <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
-                        <div className='my-4'>
+                        <div className='my-4'>{book._id}
                             <span className='test-xl mr-4 text-gray-500'>Id</span>
-                            <span>{book.id}</span>
+                            <span>{book._id}</span>
 
                         </div>
                         <div className='my-4'>
